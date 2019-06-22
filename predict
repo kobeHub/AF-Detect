@@ -1,0 +1,26 @@
+#!/bin/bash
+
+if [ $# -ne 1 ]
+then
+	echo "Usage: $(basename $0) file"
+	exit 1
+fi
+
+# "/Users/truongnm/coding/cnn/DeepECG/raw/04015.png"
+FILE_PATH=$1
+FILE_NAME=$(basename -- "$FILE_PATH")
+EXTENSION="${FILE_NAME##*.}"
+FILE_NAME_WITHOUT_EXT="A${FILE_NAME%%.*}"
+OUTPUT_DIR=$(dirname "${FILE_PATH}")
+#echo "FILE_PATH: ${FILE_PATH}"
+# echo "FILE_NAME: ${FILE_NAME}"
+# echo "EXTENSION: ${EXTENSION}"
+#echo "FILE_NAME_WITHOUT_EXT: ${FILE_NAME_WITHOUT_EXT}"
+# echo "OUTPUT_DIR: ${OUTPUT_DIR}"
+
+#python img2csv.py ${FILE_PATH}
+#/usr/local/bin/wrsamp -i uploads/${FILE_NAME_WITHOUT_EXT}.csv -o uploads/${FILE_NAME_WITHOUT_EXT} -G 1000 -F 300 -z
+#/usr/local/bin/wfdb2mat -r uploads/${FILE_NAME_WITHOUT_EXT} > /dev/null
+#mv "${FILE_NAME_WITHOUT_EXT}m.mat" ./uploads/"${FILE_NAME_WITHOUT_EXT}m.mat"
+#mv "${FILE_NAME_WITHOUT_EXT}m.hea" ./uploads/"${FILE_NAME_WITHOUT_EXT}m.hea"
+python predict.py ${FILE_PATH}

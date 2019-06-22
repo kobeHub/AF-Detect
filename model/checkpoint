@@ -1,0 +1,2 @@
+model_checkpoint_path: "/home/inno/go/src/AF-Detect/model/model-26000"
+all_model_checkpoint_paths: "/home/inno/go/src/AF-Detect/model/model-26000"
