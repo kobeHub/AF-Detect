@@ -7,7 +7,6 @@ import (
 
 	"fmt"
 	"os"
-	"strconv"
 )
 
 const fileDir = "Upload"
@@ -32,10 +31,9 @@ func getUploadFile(c *gin.Context) {
 
 	recentFile = json
 
-	ts := strconv.Itoa(json.TimeStamp)
 	go func() {
-		path := fileDir + "/" + ts + "-" + json.Name 
-		file, err := os.OpenFile(path, os.O_RDWR|os.O_CREATE, 0766)
+		path := fileDir + "/" + json.Name 
+		file, err := os.OpenFile(path, os.O_WRONLY|os.O_TRUNC|os.O_CREATE, 0766)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			fmt.Println(err)

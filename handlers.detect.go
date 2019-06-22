@@ -1,7 +1,6 @@
 package main
 
 import (
-	"strconv"
 	"fmt"
 	"os/exec"
 	"bytes"
@@ -13,26 +12,19 @@ import (
 
 // The Enumerate of labels
 type record struct {
-	FileName string
-	TimeStamp int
-	AF float64 
-	NO float64
-	UN float64
+	Name string    `json:"name"` 
 }
-
-
-var cache map[int]record
 
 // Handle the detect 
 func getDetectResult(c *gin.Context) {
-	ops := c.PostForm("ops")
+	var json record
+	if err := c.ShouldBindJSON(&json); err != nil {
+		fmt.Println(err.Error())
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
 
-	fmt.Println(ops)
-	c.JSON(http.StatusOK, gin.H{"msg": "OK"})
-	return
-
-	ts := strconv.Itoa(recentFile.TimeStamp)
-	command := "./predict Upload/" + ts + "-" + recentFile.Name
+	command := "./predict Upload/" + json.Name + ".mat"
 	res, err := detect(command)
 	if err != nil {
 		fmt.Println(err)
@@ -45,15 +37,6 @@ func getDetectResult(c *gin.Context) {
 	no, _ := jsonparser.GetFloat(data, "target_pred", "NO")
 	un, _ := jsonparser.GetFloat(data, "uncertainty")
 
-	detect_res := record{
-		FileName: recentFile.Name,
-		TimeStamp: recentFile.TimeStamp,
-		AF: af,
-		NO: no,
-		UN: un,
-	}	
-	
-	cache[recentFile.TimeStamp] = detect_res
 	c.JSON(http.StatusOK, gin.H{
 		"AF": af,
 		"NO": no,
