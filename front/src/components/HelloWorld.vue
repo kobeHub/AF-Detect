@@ -16,25 +16,14 @@
       <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start">
           <a class="navbar-item" href="/">
-            Home
+            病情分析
           </a>
 
           <a class="navbar-item" href="https://github.com/kobehub">
-            Contact
+            心电图可视化
           </a>
-        </div>
 
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <div class="buttons">
-              <a class="button is-primary">
-                <strong>注册</strong>
-              </a>
-              <a class="button is-light">
-                登录
-              </a>
-            </div>
-          </div>
+          <a class="navbar-item" href="http://github.com/kobehub">关于作者</a>
         </div>
 
       </div>
