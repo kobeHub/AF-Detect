@@ -40,7 +40,7 @@ func main() {
 	// redisPool = RedisPolling()
 
 	// Load templates for all pages
-	router.LoadHTMLGlob("templates/*")
+	// router.LoadHTMLGlob("templates/*")
 
 	// Define the router 
 	initRouters()

@@ -11,7 +11,7 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/api': 'http://localhost:8080',        // Use the local server api
+      '/api': 'http://172.17.0.2:8080',        // Use the docker server api
     },
 
     // Various Dev Server settings
@@ -43,6 +43,16 @@ module.exports = {
     cacheBusting: true,
 
     cssSourceMap: true
+  },
+
+  devServer: {
+    proxy: {
+      '/api': {
+        target: 'http://172.17.0.2:8080',
+        ws: true,
+        changeOrigin: true
+      }
+    }
   },
 
   build: {
